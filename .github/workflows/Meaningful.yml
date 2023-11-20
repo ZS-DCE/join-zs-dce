@@ -1,12 +1,12 @@
 name: Meaningful Commits Daily
 
-#on:
-  #schedule:
-    #- cron: '*/75 * * * *'  # Runs every 30 minutes
-
-
 on:
-- workflow_dispatch
+  schedule:
+    - cron: '0 0 * * *'
+
+
+#on:
+#- workflow_dispatch
   #schedule:
     #- cron: '0 0 * * *' # Schedule to run every day at midnight UTC
 
@@ -24,7 +24,7 @@ jobs:
 
       - name: Make meaningful commits
         run: |
-          for i in {1..71}; do
+          for i in {1..98}; do
             current_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
             commit_message="Update README: $current_time"
             echo "Update at $current_time" >> README.md

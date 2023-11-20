@@ -1,0 +1,32 @@
+name: Meaningful Commits Daily
+
+on:
+- workflow_dispatch
+  #schedule:
+    #- cron: '0 0 * * *' # Schedule to run every day at midnight UTC
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set Git config
+        run: |
+          git config --global user.name "aryashah2k"
+          git config --global user.email "arya.shah82@nmims.edu.in"
+
+      - name: Make meaningful commits
+        run: |
+          for i in {1..25}; do
+            current_time=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+            commit_message="Update README: $current_time"
+            echo "Update at $current_time" >> README.md
+            git add README.md
+            git commit -m "$commit_message"
+          done
+
+      - name: Push changes
+        run: |
+          git push origin main
